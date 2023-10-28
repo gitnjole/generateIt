@@ -5,35 +5,42 @@
     <?php 
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
+        require_once ('generatePassword.php');
     ?>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <div class="container">
         <h1>Password Generator</h1>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-        <div>
-            <label for="length-input">Password Length:</label>
-            <input type="number" id="length-input" name="length" min="8" max="32" value="<?php echo isset($_POST['length']) ? $_POST['length'] : '12'; ?>">
-        </div>
-        <div>
-            <input type="range" id="length-slider" name="length" min="8" max="32" value="<?php echo isset($_POST['length']) ? $_POST['length'] : '12'; ?>">
-        </div>
+            <div>
+                <label for="length-input">Password Length:</label>
+                <input type="number" id="length-input" name="length" min="8" max="32" value="<?php echo isset($_POST['length']) ? $_POST['length'] : '12'; ?>">
+            </div>
+            <div>
+                <input type="range" id="length-slider" name="length" min="8" max="32" value="<?php echo isset($_POST['length']) ? $_POST['length'] : '12'; ?>">
+            </div>
 
-        <div class="options">
             <label for="include-symbols">Include Symbols</label>
-            <input type="checkbox" id="include-symbols" checked>
+            <input type="checkbox" name="includeSymbols" id="include-symbols">
             <label for="include-numbers">Include Numbers</label>
-            <input type="checkbox" id="include-numbers" checked>
-        </div>
-        <button id="generate-button" name="generate">Generate Password</button>
+            <input type="checkbox" name="includeNumbers" checked id="include-numbers">
+
+            <button id="generate-button" name="generate">Generate Password</button>
         </form>
         <div id="password-output">
         <?php
             if (isset($_POST['generate'])) {
+
+                //length = user submit || use default value 12
                 $passwordLength = isset($_POST['length']) ? (int)$_POST['length'] : 12;
-                //$password = generatePassword($passwordLength);
-                echo "Generated Password length: $passwordLength";
-                echo "<br><br><a href=savePassword.php>Save generated password?</a>";
+                if (isset($_POST['includeNumbers'])) $includeNumbers = true;
+                else $includeNumbers = false;
+                
+                if (isset($_POST['includeSymbols'])) $includeSymbols = true;
+                else $includeSymbols = false;
+
+                $generatedPassword = generateit($passwordLength, $includeNumbers, $includeSymbols);
+                echo "Generated Password:<br> $generatedPassword";
             }
         ?>
         </div>
