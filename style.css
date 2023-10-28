@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+	background: linear-gradient(-45deg, #50C878, #F6CAA1, #D7D5D5);
+    background-size: 400% 400%;
+
+    animation: gradient 40s ease infinite;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #f0f0f0, transparent);
+    background-size: 200% 100%;
+    animation: slideBackground 2s linear infinite;
+}
+h1 {
+    font-size: 24px;
+}
+#password-output {
+    font-size: 18px;
+    margin: 10px 0;
+    word-break: break-all;
+}
+#length-slider {
+    width: 100%;
+}
+.options {
+    margin-top: 20px;
+}
+label {
+    display: inline-block;
+    margin-right: 10px;
+}
+a {
+    color: #3d3a3a;
+    text-decoration: none;
+}
+
+.error{
+    text-decoration: dotted;
+    text-decoration-color: red;
+}
